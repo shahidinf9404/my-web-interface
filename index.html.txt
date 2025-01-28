@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web Interface</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to My Web Interface</h1>
+        <div class="search-box">
+            <input type="text" id="search" placeholder="Search for documents..." oninput="searchDocuments()">
+        </div>
+        <div id="results">
+            <!-- Search results will be shown here -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
