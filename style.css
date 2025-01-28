@@ -14,10 +14,6 @@ body {
     width: 100%;
 }
 
-.search-box {
-    margin: 20px 0;
-}
-
 input[type="text"] {
     width: 80%;
     padding: 10px;
@@ -30,7 +26,14 @@ input[type="text"]:focus {
     border-color: #5b9bd5;
 }
 
-#results {
+#searchResults {
     margin-top: 20px;
     font-size: 18px;
+}
+
+#searchResults a {
+    display: block;
+    margin: 10px 0;
+    text-decoration: none;
+    color: #0056b3;
 }
