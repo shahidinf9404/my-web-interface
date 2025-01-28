@@ -1,25 +1,25 @@
-// List of PDFs in your repository (replace these with your actual PDF file names and links)
+// Senarai fail PDF yang terdapat dalam repositori GitHub (gantikan dengan URL sebenar)
 const pdfDocuments = [
-    { name: 'Document 1: Introduction to Git', url: 'https://github.com/username/my-repository/raw/main/doc1.pdf' },
-    { name: 'Document 2: How to Use GitHub', url: 'https://github.com/username/my-repository/raw/main/doc2.pdf' },
-    { name: 'Document 3: Advanced Git Techniques', url: 'https://github.com/username/my-repository/raw/main/doc3.pdf' }
+    { name: 'BORANG TEMPAHAN KENDERAAN BDHA 2024 (Hanizam)', url: 'https://github.com/username/my-repository/raw/main/BORANG%20TEMPAHAN%20KENDERAAN%20BDHA%202024%20(Hanizam).pdf' },
+    { name: 'Panduan Pengguna Perkhidmatan PCN Wifi', url: 'https://github.com/username/my-repository/raw/main/Panduan%20Pengguna%20Perkhidmatan%20PCN%20Wifi.pdf' },
+    { name: 'COUNTRIES THAT REQUIRE VISA & DO NOT REQUIRE VISA', url: 'https://github.com/username/my-repository/raw/main/COUNTRIES_THAT_REQUIRE%20VISA&DO_NOT_REQUIRE_VISA.pdf' }
 ];
 
-// Function to search for documents
+// Fungsi untuk mencari dokumen PDF
 function searchDocuments() {
     const searchQuery = document.getElementById('searchBox').value.toLowerCase();
     const filteredDocs = pdfDocuments.filter(doc => doc.name.toLowerCase().includes(searchQuery));
     
     const resultsContainer = document.getElementById('searchResults');
-    resultsContainer.innerHTML = ''; // Clear previous results
+    resultsContainer.innerHTML = ''; // Kosongkan hasil carian yang lama
 
     if (filteredDocs.length === 0) {
-        resultsContainer.innerHTML = 'No documents found.';
+        resultsContainer.innerHTML = 'Tiada dokumen ditemui.';
     } else {
         filteredDocs.forEach(doc => {
             const resultLink = document.createElement('a');
             resultLink.href = doc.url;
-            resultLink.target = "_blank";  // Open the PDF in a new tab
+            resultLink.target = "_blank";  // Buka PDF dalam tab baru
             resultLink.textContent = doc.name;
             resultsContainer.appendChild(resultLink);
         });
