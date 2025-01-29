@@ -6,11 +6,12 @@ const pdfs = [
 
 let selectedPDF = '';
 
+// Function to display the search results
 function displaySearchResults(filteredPDFs) {
     const searchResultsDiv = document.getElementById('searchResults');
     searchResultsDiv.innerHTML = ''; // Clear previous results
 
-    // Hide results if no matching PDFs
+    // If there are no results, hide the search results div
     if (filteredPDFs.length === 0) {
         searchResultsDiv.style.display = 'none';
         return;
@@ -28,21 +29,25 @@ function displaySearchResults(filteredPDFs) {
     });
 }
 
+// Function to handle the search box input
 function searchDocuments() {
     const searchQuery = document.getElementById('searchBox').value.toLowerCase();
-    
-    // If search query is empty, hide the results
+    const searchResultsDiv = document.getElementById('searchResults');
+
+    // If search query is empty, hide results and reset the content
     if (searchQuery.trim() === '') {
-        document.getElementById('searchResults').style.display = 'none';
-        return;  // Exit early if there's no search query
+        searchResultsDiv.style.display = 'none'; // Hide the results
+        searchResultsDiv.innerHTML = ''; // Clear the results
+        return;
     }
 
     // Filter PDFs based on the search query
     const filteredPDFs = pdfs.filter(pdf => pdf.title.toLowerCase().includes(searchQuery));
     
-    displaySearchResults(filteredPDFs); // Display the matching PDFs
+    displaySearchResults(filteredPDFs); // Display the filtered PDFs
 }
 
+// Function to preview the PDF
 function previewPDF(pdf) {
     selectedPDF = pdf;
     const pdfPreview = document.getElementById('pdfPreview');
@@ -50,15 +55,17 @@ function previewPDF(pdf) {
     document.getElementById('pdfPreviewModal').style.display = 'flex';
 }
 
+// Function to close the PDF preview modal
 function closeModal() {
     document.getElementById('pdfPreviewModal').style.display = 'none';
 }
 
+// Function to download the PDF
 function downloadPDF() {
     if (selectedPDF) {
         window.location.href = selectedPDF.file;
     }
 }
 
-// Initialize with no search results shown
+// Initialize by hiding the results and showing only the search box
 document.getElementById('searchResults').style.display = 'none';
