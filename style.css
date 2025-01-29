@@ -33,11 +33,10 @@ input[type="text"] {
 #document-list li a:hover {
     text-decoration: underline;
 }
-iframe {
-    border: none;
-    width: 100%;
-    height: 600px;
+canvas {
+    border: 1px solid #ccc;
     margin-top: 20px;
+    width: 100%;
 }
 #download-btn {
     display: none;
