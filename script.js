@@ -1,88 +1,46 @@
-// Function to filter documents based on search input
-function filterDocuments() {
-    let input = document.getElementById('search-box').value.toLowerCase();
-    let listItems = document.querySelectorAll('#document-list li');
-    listItems.forEach(item => {
-        let text = item.textContent.toLowerCase();
-        if (text.includes(input)) {
-            item.style.display = '';
-        } else {
-            item.style.display = 'none';
-        }
+const pdfs = [
+    { title: "BORANG TEMPAHAN KENDERAAN BDHA 2024(Hanizam)", file: "pdfs/BORANG%20TEMPAHAN%20KENDERAAN%20BDHA%202024%28Hanizam%29.pdf" },
+    { title: "Panduan Pengguna Perkhidmatan PCN Wifi", file: "pdfs/Panduan%20Pengguna%20Perkhidmatan%20PCN%20Wifi.pdf" },
+    { title: "COUNTRIES_THAT_REQUIRE VISA&DO_NOT_REQUIRE_VISA", file: "pdfs/COUNTRIES_THAT_REQUIRE%20VISA%26DO_NOT_REQUIRE%20VISA.pdf" }
+];
+
+let selectedPDF = '';
+
+function displayPDFList(filteredPDFs) {
+    const pdfListDiv = document.getElementById('pdfList');
+    pdfListDiv.innerHTML = '';
+    
+    filteredPDFs.forEach(pdf => {
+        const pdfItem = document.createElement('div');
+        pdfItem.classList.add('pdf-item');
+        pdfItem.innerText = pdf.title;
+        pdfItem.onclick = () => previewPDF(pdf);
+        pdfListDiv.appendChild(pdfItem);
     });
 }
 
-// Function to view the selected document
-function viewDocument(docName) {
-    let pdfUrl;
-    let downloadUrl;
+function searchDocuments() {
+    const searchQuery = document.getElementById('searchBox').value.toLowerCase();
+    const filteredPDFs = pdfs.filter(pdf => pdf.title.toLowerCase().includes(searchQuery));
+    displayPDFList(filteredPDFs);
+}
 
-    // Define the URLs for each document (ensure the link is raw)
-    switch(docName) {
-        case 'BORANG TEMPAHAN KENDERAAN BDHA 2024 (Hanizam)':
-            pdfUrl = 'https://raw.githubusercontent.com/shahidinf9404/my-web-interface/main/New%20folder/BORANG%20TEMPAHAN%20KENDERAAN%20BDHA%202024%28Hanizam%29.pdf';
-            downloadUrl = pdfUrl;
-            break;
-        case 'COUNTRIES_THAT_REQUIRE VISA&DO_NOT_REQUIRE_VISA':
-            pdfUrl = 'https://raw.githubusercontent.com/shahidinf9404/my-web-interface/main/New%20folder/COUNTRIES_THAT_REQUIRE%20VISA%26DO_NOT_REQUIRE%20VISA.pdf';
-            downloadUrl = pdfUrl;
-            break;
-        case 'Panduan Pengguna Perkhidmatan PCN Wifi':
-            pdfUrl = 'https://raw.githubusercontent.com/shahidinf9404/my-web-interface/main/New%20folder/Panduan%20Pengguna%20Perkhidmatan%20PCN%20Wifi.pdf';
-            downloadUrl = pdfUrl;
-            break;
-        default:
-            return;
+function previewPDF(pdf) {
+    selectedPDF = pdf;
+    const pdfPreview = document.getElementById('pdfPreview');
+    pdfPreview.src = selectedPDF.file;
+    document.getElementById('pdfPreviewModal').style.display = 'flex';
+}
+
+function closeModal() {
+    document.getElementById('pdfPreviewModal').style.display = 'none';
+}
+
+function downloadPDF() {
+    if (selectedPDF) {
+        window.location.href = selectedPDF.file;
     }
-
-    // Display the title of the document
-    document.getElementById('document-title').textContent = docName;
-    document.getElementById('document-title').style.display = 'block';
-
-    // Load the PDF into the canvas using PDF.js
-    const canvas = document.getElementById('pdf-canvas');
-    const context = canvas.getContext('2d');
-
-    // Clear any previous canvas content
-    context.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Use PDF.js to fetch and render the PDF
-    pdfjsLib.getDocument({
-        url: pdfUrl,
-        cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/cmaps/', // Added CMap URL to handle character mapping
-        cMapPacked: true
-    }).promise.then(function(pdf) {
-        console.log('PDF loaded');
-        pdf.getPage(1).then(function(page) {
-            console.log('Page loaded');
-
-            var scale = 1.5;
-            var viewport = page.getViewport({ scale: scale });
-
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
-
-            var renderContext = {
-                canvasContext: context,
-                viewport: viewport
-            };
-            page.render(renderContext);
-        });
-    }).catch(function(error) {
-        console.error('Error loading PDF:', error);
-        alert('There was an error loading the PDF. Please try again later.');
-    });
-
-    // Show the viewer and the download button
-    document.getElementById('pdf-viewer').style.display = 'block';
-    document.getElementById('download-btn').style.display = 'inline-block';
-    document.getElementById('download-btn').onclick = function() {
-        window.location.href = downloadUrl;
-    };
 }
 
-// Function to download the document
-function downloadDocument() {
-    const downloadUrl = document.getElementById('download-btn').onclick;
-    window.location.href = downloadUrl;
-}
+// Initial display of all PDFs
+displayPDFList(pdfs);

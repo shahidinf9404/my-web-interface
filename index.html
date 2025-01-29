@@ -3,29 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document Viewer</title>
+    <title>PDF Search and Viewer</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
 </head>
 <body>
-
-    <h1>Document Viewer</h1>
-
-    <input type="text" id="search-box" placeholder="Search for a document..." onkeyup="filterDocuments()">
-    
-    <ul id="document-list">
-        <li><a href="#" onclick="viewDocument('BORANG TEMPAHAN KENDERAAN BDHA 2024 (Hanizam)')">BORANG TEMPAHAN KENDERAAN BDHA 2024 (Hanizam)</a></li>
-        <li><a href="#" onclick="viewDocument('COUNTRIES_THAT_REQUIRE VISA&DO_NOT_REQUIRE_VISA')">COUNTRIES_THAT_REQUIRE VISA&DO_NOT_REQUIRE_VISA</a></li>
-        <li><a href="#" onclick="viewDocument('Panduan Pengguna Perkhidmatan PCN Wifi')">Panduan Pengguna Perkhidmatan PCN Wifi</a></li>
-    </ul>
-
-    <h2 id="document-title" style="display:none;"></h2>
-    
-    <div id="pdf-viewer" style="display:none;">
-        <canvas id="pdf-canvas"></canvas>
+    <div class="container">
+        <h1>Search PDF Documents</h1>
+        <input type="text" id="searchBox" placeholder="Search documents..." onkeyup="searchDocuments()">
+        <div id="pdfList" class="pdf-list">
+            <!-- Dynamic list of PDF documents will appear here -->
+        </div>
     </div>
-    
-    <button id="download-btn" onclick="downloadDocument()">Download Document</button>
+
+    <!-- Modal to preview PDF -->
+    <div id="pdfPreviewModal" class="modal">
+        <div class="modal-content">
+            <button id="closeModal" onclick="closeModal()">Close</button>
+            <embed id="pdfPreview" type="application/pdf" width="100%" height="600px" />
+            <button id="downloadBtn" onclick="downloadPDF()">Download PDF</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
