@@ -68,7 +68,7 @@ input[type="text"]:focus {
 /* Search Results */
 .search-results {
     margin-top: 20px;
-    display: none;
+    display: none; /* Hide the results by default */
 }
 
 .search-result-item {
