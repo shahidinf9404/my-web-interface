@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View PDF Documents - My Web Interface</title>
+    <title>Document Viewer - My Web Interface</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,25 +16,117 @@
         h2 {
             color: #555;
         }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        #document-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        #document-list li {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        #document-list li a {
+            text-decoration: none;
+            color: #007bff;
+            cursor: pointer;
+        }
+        #document-list li a:hover {
+            text-decoration: underline;
+        }
         iframe {
             border: none;
-            margin-bottom: 20px;
+            width: 100%;
+            height: 600px;
+            margin-top: 20px;
+        }
+        #download-btn {
+            display: none;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #download-btn:hover {
+            background-color: #218838;
         }
     </style>
 </head>
 <body>
-    <h1>PDF Documents in My Web Interface</h1>
-    
-    <p>Below are some important PDF documents you can view:</p>
 
-    <h2>BORANG TEMPAHAN KENDERAAN BDHA 2024 (Hanizam)</h2>
-    <iframe src="https://github.com/shahidinf9404/my-web-interface/raw/main/New%20folder/BORANG%20TEMPAHAN%20KENDERAAN%20BDHA%202024%28Hanizam%29.pdf" width="100%" height="600px"></iframe>
-    
-    <h2>COUNTRIES_THAT_REQUIRE VISA&DO_NOT_REQUIRE_VISA</h2>
-    <iframe src="https://github.com/shahidinf9404/my-web-interface/raw/main/New%20folder/COUNTRIES_THAT_REQUIRE%20VISA%26DO_NOT_REQUIRE%20VISA.pdf" width="100%" height="600px"></iframe>
+    <h1>Document Viewer - My Web Interface</h1>
 
-    <h2>Panduan Pengguna Perkhidmatan PCN Wifi</h2>
-    <iframe src="https://github.com/shahidinf9404/my-web-interface/raw/main/New%20folder/Panduan%20Pengguna%20Perkhidmatan%20PCN%20Wifi.pdf" width="100%" height="600px"></iframe>
+    <input type="text" id="search-box" placeholder="Search for a document..." onkeyup="filterDocuments()">
+
+    <ul id="document-list">
+        <li><a href="#" onclick="viewDocument('BORANG TEMPAHAN KENDERAAN BDHA 2024 (Hanizam)')">BORANG TEMPAHAN KENDERAAN BDHA 2024 (Hanizam)</a></li>
+        <li><a href="#" onclick="viewDocument('COUNTRIES_THAT_REQUIRE VISA&DO_NOT_REQUIRE_VISA')">COUNTRIES_THAT_REQUIRE VISA&DO_NOT_REQUIRE_VISA</a></li>
+        <li><a href="#" onclick="viewDocument('Panduan Pengguna Perkhidmatan PCN Wifi')">Panduan Pengguna Perkhidmatan PCN Wifi</a></li>
+    </ul>
+
+    <h2 id="document-title" style="display:none;"></h2>
+    <iframe id="pdf-viewer" style="display:none;"></iframe>
+    <button id="download-btn" onclick="downloadDocument()">Download Document</button>
+
+    <script>
+        // Function to filter documents based on search input
+        function filterDocuments() {
+            let input = document.getElementById('search-box').value.toLowerCase();
+            let listItems = document.querySelectorAll('#document-list li');
+            listItems.forEach(item => {
+                let text = item.textContent.toLowerCase();
+                if (text.includes(input)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Function to display the selected document
+        function viewDocument(docName) {
+            let pdfUrl;
+            let downloadUrl;
+
+            switch(docName) {
+                case 'BORANG TEMPAHAN KENDERAAN BDHA 2024 (Hanizam)':
+                    pdfUrl = 'https://github.com/shahidinf9404/my-web-interface/raw/main/New%20folder/BORANG%20TEMPAHAN%20KENDERAAN%20BDHA%202024%28Hanizam%29.pdf';
+                    downloadUrl = 'https://github.com/shahidinf9404/my-web-interface/raw/main/New%20folder/BORANG%20TEMPAHAN%20KENDERAAN%20BDHA%202024%28Hanizam%29.pdf';
+                    break;
+                case 'COUNTRIES_THAT_REQUIRE VISA&DO_NOT_REQUIRE_VISA':
+                    pdfUrl = 'https://github.com/shahidinf9404/my-web-interface/raw/main/New%20folder/COUNTRIES_THAT_REQUIRE%20VISA%26DO_NOT_REQUIRE%20VISA.pdf';
+                    downloadUrl = 'https://github.com/shahidinf9404/my-web-interface/raw/main/New%20folder/COUNTRIES_THAT_REQUIRE%20VISA%26DO_NOT_REQUIRE%20VISA.pdf';
+                    break;
+                case 'Panduan Pengguna Perkhidmatan PCN Wifi':
+                    pdfUrl = 'https://github.com/shahidinf9404/my-web-interface/raw/main/New%20folder/Panduan%20Pengguna%20Perkhidmatan%20PCN%20Wifi.pdf';
+                    downloadUrl = 'https://github.com/shahidinf9404/my-web-interface/raw/main/New%20folder/Panduan%20Pengguna%20Perkhidmatan%20PCN%20Wifi.pdf';
+                    break;
+                default:
+                    return;
+            }
+
+            // Update the viewer and show it
+            document.getElementById('document-title').textContent = docName;
+            document.getElementById('document-title').style.display = 'block';
+            document.getElementById('pdf-viewer').style.display = 'block';
+            document.getElementById('pdf-viewer').src = pdfUrl;
+
+            // Enable download button
+            document.getElementById('download-btn').style.display = 'inline-block';
+            document.getElementById('download-btn').onclick = function() {
+                window.location.href = downloadUrl;
+            };
+        }
+    </script>
 
 </body>
 </html>
