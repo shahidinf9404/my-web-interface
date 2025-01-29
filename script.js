@@ -10,12 +10,13 @@ function displaySearchResults(filteredPDFs) {
     const searchResultsDiv = document.getElementById('searchResults');
     searchResultsDiv.innerHTML = ''; // Clear previous results
 
+    // Hide results if no matching PDFs
     if (filteredPDFs.length === 0) {
         searchResultsDiv.style.display = 'none';
         return;
     }
 
-    // Show search results
+    // Show search results if there are matches
     searchResultsDiv.style.display = 'block';
 
     filteredPDFs.forEach(pdf => {
@@ -29,8 +30,17 @@ function displaySearchResults(filteredPDFs) {
 
 function searchDocuments() {
     const searchQuery = document.getElementById('searchBox').value.toLowerCase();
+    
+    // If search query is empty, hide the results
+    if (searchQuery.trim() === '') {
+        document.getElementById('searchResults').style.display = 'none';
+        return;  // Exit early if there's no search query
+    }
+
+    // Filter PDFs based on the search query
     const filteredPDFs = pdfs.filter(pdf => pdf.title.toLowerCase().includes(searchQuery));
-    displaySearchResults(filteredPDFs);
+    
+    displaySearchResults(filteredPDFs); // Display the matching PDFs
 }
 
 function previewPDF(pdf) {
@@ -50,5 +60,5 @@ function downloadPDF() {
     }
 }
 
-// Initial call to hide results and show PDF on search
+// Initialize with no search results shown
 document.getElementById('searchResults').style.display = 'none';
