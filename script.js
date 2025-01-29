@@ -1,17 +1,3 @@
-// Function to filter documents based on search input
-function filterDocuments() {
-    let input = document.getElementById('search-box').value.toLowerCase();
-    let listItems = document.querySelectorAll('#document-list li');
-    listItems.forEach(item => {
-        let text = item.textContent.toLowerCase();
-        if (text.includes(input)) {
-            item.style.display = '';
-        } else {
-            item.style.display = 'none';
-        }
-    });
-}
-
 // Function to view the selected document
 function viewDocument(docName) {
     let pdfUrl;
@@ -20,15 +6,15 @@ function viewDocument(docName) {
     // Define the URLs for each document (ensure the link is raw)
     switch(docName) {
         case 'BORANG TEMPAHAN KENDERAAN BDHA 2024 (Hanizam)':
-            pdfUrl = 'https://github.com/shahidinf9404/my-web-interface/raw/main/New%20folder/BORANG%20TEMPAHAN%20KENDERAAN%20BDHA%202024%28Hanizam%29.pdf';
+            pdfUrl = 'https://raw.githubusercontent.com/shahidinf9404/my-web-interface/main/New%20folder/BORANG%20TEMPAHAN%20KENDERAAN%20BDHA%202024%28Hanizam%29.pdf';
             downloadUrl = pdfUrl;
             break;
         case 'COUNTRIES_THAT_REQUIRE VISA&DO_NOT_REQUIRE_VISA':
-            pdfUrl = 'https://github.com/shahidinf9404/my-web-interface/raw/main/New%20folder/COUNTRIES_THAT_REQUIRE%20VISA%26DO_NOT_REQUIRE%20VISA.pdf';
+            pdfUrl = 'https://raw.githubusercontent.com/shahidinf9404/my-web-interface/main/New%20folder/COUNTRIES_THAT_REQUIRE%20VISA%26DO_NOT_REQUIRE%20VISA.pdf';
             downloadUrl = pdfUrl;
             break;
         case 'Panduan Pengguna Perkhidmatan PCN Wifi':
-            pdfUrl = 'https://github.com/shahidinf9404/my-web-interface/raw/main/New%20folder/Panduan%20Pengguna%20Perkhidmatan%20PCN%20Wifi.pdf';
+            pdfUrl = 'https://raw.githubusercontent.com/shahidinf9404/my-web-interface/main/New%20folder/Panduan%20Pengguna%20Perkhidmatan%20PCN%20Wifi.pdf';
             downloadUrl = pdfUrl;
             break;
         default:
@@ -46,7 +32,7 @@ function viewDocument(docName) {
     // Clear any previous canvas content
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Fetch the PDF document from the URL
+    // Fetch the PDF document from the raw URL
     pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
         console.log('PDF loaded');
         pdf.getPage(1).then(function(page) {
@@ -75,10 +61,4 @@ function viewDocument(docName) {
     document.getElementById('download-btn').onclick = function() {
         window.location.href = downloadUrl;
     };
-}
-
-// Function to download the document
-function downloadDocument() {
-    const downloadUrl = document.getElementById('download-btn').onclick;
-    window.location.href = downloadUrl;
 }
