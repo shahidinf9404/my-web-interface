@@ -7,15 +7,13 @@ const pdfs = [
 // Function to display the search results
 function displaySearchResults(filteredPDFs) {
     const searchResultsDiv = document.getElementById('searchResults');
-    searchResultsDiv.innerHTML = ''; // Clear previous results
+    searchResultsDiv.innerHTML = '';
 
-    // If there are no results, hide the search results div
     if (filteredPDFs.length === 0) {
         searchResultsDiv.style.display = 'none';
         return;
     }
 
-    // Show search results if there are matches
     searchResultsDiv.style.display = 'block';
 
     filteredPDFs.forEach(pdf => {
@@ -27,38 +25,21 @@ function displaySearchResults(filteredPDFs) {
     });
 }
 
-// Function to handle the search box input
 function searchDocuments() {
     const searchQuery = document.getElementById('searchBox').value.toLowerCase();
-    const searchResultsDiv = document.getElementById('searchResults');
-
-    // If search query is empty, hide results and reset the content
-    if (searchQuery.trim() === '') {
-        searchResultsDiv.style.display = 'none'; // Hide the results
-        searchResultsDiv.innerHTML = ''; // Clear the results
-        return;
-    }
-
-    // Filter PDFs based on the search query
     const filteredPDFs = pdfs.filter(pdf => pdf.title.toLowerCase().includes(searchQuery));
-    
-    displaySearchResults(filteredPDFs); // Display the filtered PDFs
+    displaySearchResults(filteredPDFs);
 }
 
-// Function to show the PDF directly in the same container
 function showPDF(pdf) {
-    // Hide the search results
-    const searchResultsDiv = document.getElementById('searchResults');
-    searchResultsDiv.style.display = 'none';
-
-    // Show the PDF preview container
-    const pdfPreviewDiv = document.getElementById('pdfPreview');
-    pdfPreviewDiv.style.display = 'block'; // Make the preview visible
-
-    // Set the PDF source to the selected document
-    const pdfViewer = document.getElementById('pdfViewer');
-    pdfViewer.src = pdf.file; // Load the PDF into the iframe
+    document.getElementById('searchResults').style.display = 'none';
+    document.getElementById('pdfPreview').style.display = 'block';
+    document.getElementById('pdfViewer').src = pdf.file;
 }
 
-// Initialize by hiding the results and showing only the search box
+function closePdfViewer() {
+    document.getElementById('pdfPreview').style.display = 'none';
+    document.getElementById('pdfViewer').src = '';
+}
+
 document.getElementById('searchResults').style.display = 'none';
