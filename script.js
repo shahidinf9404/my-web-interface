@@ -13,7 +13,10 @@ function displayPDFList(filteredPDFs) {
     filteredPDFs.forEach(pdf => {
         const pdfItem = document.createElement('div');
         pdfItem.classList.add('pdf-item');
-        pdfItem.innerText = pdf.title;
+        pdfItem.innerHTML = `
+            <h3>${pdf.title}</h3>
+            <p>Click to view or download</p>
+        `;
         pdfItem.onclick = () => previewPDF(pdf);
         pdfListDiv.appendChild(pdfItem);
     });
