@@ -4,8 +4,6 @@ const pdfs = [
     { title: "COUNTRIES_THAT_REQUIRE_VISA_and_DO_NOT_REQUIRE_VISA", file: "pdfs/COUNTRIES%20THAT%20REQUIRE%20VISA%20and%20DO%20NOT%20REQUIRE%20VISA.pdf" }
 ];
 
-let selectedPDF = '';
-
 // Function to display the search results
 function displaySearchResults(filteredPDFs) {
     const searchResultsDiv = document.getElementById('searchResults');
@@ -47,20 +45,19 @@ function searchDocuments() {
     displaySearchResults(filteredPDFs); // Display the filtered PDFs
 }
 
-// Function to show the PDF directly in the page below the search box
+// Function to show the PDF directly in the separate container below the search box
 function showPDF(pdf) {
-    selectedPDF = pdf;
-    const pdfPreview = document.getElementById('pdfPreview');
-    const pdfViewer = document.getElementById('pdfViewer');
-
-    // Log the file path to check it's correct
-    console.log("Opening PDF: ", pdf.file);
+    // Hide the search results
+    const searchResultsDiv = document.getElementById('searchResults');
+    searchResultsDiv.style.display = 'none';
 
     // Set the PDF source to the selected document
+    const pdfPreview = document.getElementById('pdfPreview');
     pdfPreview.src = pdf.file;
 
-    // Show the PDF viewer and the embedded PDF
-    pdfViewer.style.display = 'block';
+    // Show the PDF viewer container
+    const pdfViewerContainer = document.getElementById('pdfViewerContainer');
+    pdfViewerContainer.style.display = 'block';
 }
 
 // Initialize by hiding the results and showing only the search box

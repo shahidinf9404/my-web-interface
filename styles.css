@@ -89,8 +89,8 @@ input[type="text"]:focus {
 }
 
 /* PDF Viewer */
-.pdf-viewer {
-    margin-top: 20px;
+.pdf-viewer-container {
+    margin-top: 30px;
     display: none; /* Hide the PDF viewer initially */
     text-align: center;
 }
@@ -116,9 +116,5 @@ embed {
 
     .search-result-item {
         padding: 12px;
-    }
-
-    button {
-        padding: 12px 24px;
     }
 }
