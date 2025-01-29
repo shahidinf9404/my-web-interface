@@ -1,3 +1,17 @@
+// Function to filter documents based on search input
+function filterDocuments() {
+    let input = document.getElementById('search-box').value.toLowerCase();
+    let listItems = document.querySelectorAll('#document-list li');
+    listItems.forEach(item => {
+        let text = item.textContent.toLowerCase();
+        if (text.includes(input)) {
+            item.style.display = '';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
 // Function to view the selected document
 function viewDocument(docName) {
     let pdfUrl;
@@ -32,8 +46,12 @@ function viewDocument(docName) {
     // Clear any previous canvas content
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Fetch the PDF document from the raw URL
-    pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
+    // Use PDF.js to fetch and render the PDF
+    pdfjsLib.getDocument({
+        url: pdfUrl,
+        cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/cmaps/', // Added CMap URL to handle character mapping
+        cMapPacked: true
+    }).promise.then(function(pdf) {
         console.log('PDF loaded');
         pdf.getPage(1).then(function(page) {
             console.log('Page loaded');
@@ -61,4 +79,10 @@ function viewDocument(docName) {
     document.getElementById('download-btn').onclick = function() {
         window.location.href = downloadUrl;
     };
+}
+
+// Function to download the document
+function downloadDocument() {
+    const downloadUrl = document.getElementById('download-btn').onclick;
+    window.location.href = downloadUrl;
 }
