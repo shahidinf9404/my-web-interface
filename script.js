@@ -53,10 +53,20 @@ function showPDF(pdf) {
 
     // Set the PDF source to the selected document
     const pdfPreview = document.getElementById('pdfPreview');
-    pdfPreview.src = pdf.file;
+    const pdfViewerContainer = document.getElementById('pdfViewerContainer');
+
+    // Try using the iframe for PDF embedding
+    const iframe = document.createElement('iframe');
+    iframe.src = pdf.file;
+    iframe.width = "100%";
+    iframe.height = "600px";
+    iframe.style.border = "none";
+    
+    // Clear the existing content and append the iframe
+    pdfPreview.innerHTML = '';
+    pdfPreview.appendChild(iframe);
 
     // Show the PDF viewer container
-    const pdfViewerContainer = document.getElementById('pdfViewerContainer');
     pdfViewerContainer.style.display = 'block';
 }
 
