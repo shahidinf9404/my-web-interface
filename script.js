@@ -53,8 +53,11 @@ function showPDF(pdf) {
     const pdfPreview = document.getElementById('pdfPreview');
     const pdfViewer = document.getElementById('pdfViewer');
 
+    // Log the file path to check it's correct
+    console.log("Opening PDF: ", pdf.file);
+
     // Set the PDF source to the selected document
-    pdfPreview.src = selectedPDF.file;
+    pdfPreview.src = pdf.file;
 
     // Show the PDF viewer and the embedded PDF
     pdfViewer.style.display = 'block';
