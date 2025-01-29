@@ -45,29 +45,19 @@ function searchDocuments() {
     displaySearchResults(filteredPDFs); // Display the filtered PDFs
 }
 
-// Function to show the PDF directly in the separate container below the search box
+// Function to show the PDF directly in the same container
 function showPDF(pdf) {
     // Hide the search results
     const searchResultsDiv = document.getElementById('searchResults');
     searchResultsDiv.style.display = 'none';
 
+    // Show the PDF preview container
+    const pdfPreviewDiv = document.getElementById('pdfPreview');
+    pdfPreviewDiv.style.display = 'block'; // Make the preview visible
+
     // Set the PDF source to the selected document
-    const pdfPreview = document.getElementById('pdfPreview');
-    const pdfViewerContainer = document.getElementById('pdfViewerContainer');
-
-    // Try using the iframe for PDF embedding
-    const iframe = document.createElement('iframe');
-    iframe.src = pdf.file;
-    iframe.width = "100%";
-    iframe.height = "600px";
-    iframe.style.border = "none";
-    
-    // Clear the existing content and append the iframe
-    pdfPreview.innerHTML = '';
-    pdfPreview.appendChild(iframe);
-
-    // Show the PDF viewer container
-    pdfViewerContainer.style.display = 'block';
+    const pdfViewer = document.getElementById('pdfViewer');
+    pdfViewer.src = pdf.file; // Load the PDF into the iframe
 }
 
 // Initialize by hiding the results and showing only the search box
