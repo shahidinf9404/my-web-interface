@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Search PDF Documents23</h1>
+        <h1>Search PDF Documents</h1>
         <input type="text" id="searchBox" placeholder="Search documents..." onkeyup="searchDocuments()">
         
         <!-- Search Results Container -->
@@ -16,10 +16,9 @@
             <!-- Dynamic search results will appear here -->
         </div>
 
-        <!-- PDF Viewer Container (will be shown when a file is selected) -->
-        <div id="pdfViewerContainer" class="pdf-viewer-container" style="display:none;">
-            <h2>Document Viewer</h2>
-            <div id="pdfPreview"></div>  <!-- Container for the iframe -->
+        <!-- PDF Viewer Container (will be shown in the same container) -->
+        <div id="pdfPreview" class="pdf-preview" style="display:none;">
+            <iframe id="pdfViewer" src="" width="100%" height="600px" style="border:none;"></iframe>
         </div>
     </div>
 
