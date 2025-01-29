@@ -24,7 +24,7 @@ function displaySearchResults(filteredPDFs) {
         const pdfItem = document.createElement('div');
         pdfItem.classList.add('search-result-item');
         pdfItem.innerHTML = `<h3>${pdf.title}</h3>`;
-        pdfItem.onclick = () => openPDFInNewPage(pdf);
+        pdfItem.onclick = () => showPDF(pdf);
         searchResultsDiv.appendChild(pdfItem);
     });
 }
@@ -47,10 +47,17 @@ function searchDocuments() {
     displaySearchResults(filteredPDFs); // Display the filtered PDFs
 }
 
-// Function to open the PDF directly in a new tab/page
-function openPDFInNewPage(pdf) {
-    // Open the PDF file in a new tab or window
-    window.open(pdf.file, '_blank');
+// Function to show the PDF directly in the page below the search box
+function showPDF(pdf) {
+    selectedPDF = pdf;
+    const pdfPreview = document.getElementById('pdfPreview');
+    const pdfViewer = document.getElementById('pdfViewer');
+
+    // Set the PDF source to the selected document
+    pdfPreview.src = selectedPDF.file;
+
+    // Show the PDF viewer and the embedded PDF
+    pdfViewer.style.display = 'block';
 }
 
 // Initialize by hiding the results and showing only the search box
