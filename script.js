@@ -17,7 +17,7 @@ function viewDocument(docName) {
     let pdfUrl;
     let downloadUrl;
 
-    // Define the URLs for each document
+    // Define the URLs for each document (ensure the link is raw)
     switch(docName) {
         case 'BORANG TEMPAHAN KENDERAAN BDHA 2024 (Hanizam)':
             pdfUrl = 'https://github.com/shahidinf9404/my-web-interface/raw/main/New%20folder/BORANG%20TEMPAHAN%20KENDERAAN%20BDHA%202024%28Hanizam%29.pdf';
@@ -38,11 +38,15 @@ function viewDocument(docName) {
     // Display the title of the document
     document.getElementById('document-title').textContent = docName;
     document.getElementById('document-title').style.display = 'block';
-    
+
     // Load the PDF into the canvas using PDF.js
     const canvas = document.getElementById('pdf-canvas');
     const context = canvas.getContext('2d');
 
+    // Clear any previous canvas content
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Fetch the PDF document from the URL
     pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
         console.log('PDF loaded');
         pdf.getPage(1).then(function(page) {
@@ -60,6 +64,9 @@ function viewDocument(docName) {
             };
             page.render(renderContext);
         });
+    }).catch(function(error) {
+        console.error('Error loading PDF:', error);
+        alert('There was an error loading the PDF. Please try again later.');
     });
 
     // Show the viewer and the download button
