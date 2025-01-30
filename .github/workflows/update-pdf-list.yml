@@ -39,5 +39,5 @@ jobs:
 
       - name: Push changes
         run: |
-          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
+          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/shahidinf9404/my-web-interface.git
           git push
