@@ -19,26 +19,31 @@ jobs:
         run: |
           echo "Generating list of PDFs..."
           PDF_FILES=$(find pdfs -type f -name "*.pdf")
-          echo "Found the following PDFs: $PDF_FILES"
+          echo "Found the following PDFs:"
+          echo "$PDF_FILES"
           
-          # Escape spaces in file names by wrapping each file path in quotes
-          PDF_FILES_ESCAPED=$(echo "$PDF_FILES" | sed 's/ /\\ /g')
-          
-          # Set the PDFs list to the GitHub environment
-          echo "PDF_FILES=\"$PDF_FILES_ESCAPED\"" >> $GITHUB_ENV
+          # Create a file with the PDF file paths for later use
+          echo "$PDF_FILES" > pdf_list.txt
 
       # Update the script.js with the new PDF list
       - name: Update script.js
         run: |
           echo "Updating script.js with new PDF list..."
           echo "const pdfs = [" > script.js
+          
+          # URL encode spaces and special characters
+          url_encode() {
+            local string="$1"
+            echo -n "$string" | jq -sRr @uri
+          }
+
           # Loop through each PDF file and add it to the script.js file
-          for pdf in $PDF_FILES_ESCAPED; do
+          while IFS= read -r pdf; do
             title=$(basename "$pdf" .pdf)
-            # Ensure the file path is properly escaped for JS
-            escaped_pdf="${pdf//\//\\/}"
-            echo "    { title: \"$title\", file: \"$escaped_pdf\" }," >> script.js
-          done
+            encoded_pdf=$(url_encode "$pdf")
+            # Append the data in the required format
+            echo "    { title: \"$title\", file: \"$encoded_pdf\" }," >> script.js
+          done < pdf_list.txt
           echo "];" >> script.js
 
       # Commit and push the changes to script.js
