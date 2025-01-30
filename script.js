@@ -11,6 +11,7 @@ function displaySearchResults(filteredPDFs) {
 
     if (filteredPDFs.length === 0) {
         searchResultsDiv.style.display = 'none';
+        console.log("No results found.");
         return;
     }
 
@@ -30,8 +31,8 @@ function searchDocuments() {
     const searchResultsDiv = document.getElementById('searchResults');
 
     if (searchQuery === "") {
-        searchResultsDiv.innerHTML = ''; // Kosongkan hasil pencarian
-        searchResultsDiv.style.display = 'none'; // Sembunyikan daftar
+        searchResultsDiv.innerHTML = ''; // Clear search results
+        searchResultsDiv.style.display = 'none'; // Hide results container
         return;
     }
 
