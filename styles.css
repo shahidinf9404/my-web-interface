@@ -88,59 +88,88 @@ input[type="text"]:focus {
 
 /* PDF Preview */
 .pdf-preview {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8); /* Latar belakang gelap */
+    margin-top: 30px;
     display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+    animation: fadeIn 1s ease-in-out;
+    position: relative;
 }
 
 /* Close Button */
 .close-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: rgba(255, 0, 0, 0.8);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: red;
     color: white;
     border: none;
-    padding: 10px 15px;
-    font-size: 18px;
-    font-weight: bold;
+    padding: 8px 12px;
+    font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
-    transition: background 0.3s ease, transform 0.2s ease;
-    z-index: 9999;
+    transition: background 0.3s ease;
 }
 
 .close-btn:hover {
-    background: rgba(200, 0, 0, 0.9);
-    transform: scale(1.1);
+    background: darkred;
 }
 
 /* PDF Viewer */
-#pdfViewer {
-    width: 90%;
-    height: 80vh;
+iframe {
     border-radius: 10px;
-    background: white;
-    z-index: 1001;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    width: 100%;
+    height: 600px;
+    border: none;
 }
 
-/* Responsif */
+/* Hover Effects for PDF Viewer */
+iframe:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Animations */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
 @media screen and (max-width: 768px) {
-    .close-btn {
-        top: 10px;
-        right: 10px;
-        font-size: 16px;
+    .container {
+        padding: 20px;
     }
 
-    #pdfViewer {
-        width: 95%;
-        height: 75vh;
+    h1 {
+        font-size: 2rem;
+    }
+
+    input[type="text"] {
+        max-width: 100%;
+    }
+
+    .search-result-item {
+        padding: 12px;
+    }
+
+    .close-btn {
+        font-size: 14px;
+        padding: 6px 10px;
     }
 }

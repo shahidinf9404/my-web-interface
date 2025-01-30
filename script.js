@@ -26,19 +26,14 @@ function displaySearchResults(filteredPDFs) {
 }
 
 function searchDocuments() {
-    const searchQuery = document.getElementById('searchBox').value.toLowerCase().trim();
+    const searchQuery = document.getElementById('searchBox').value.toLowerCase();
     const filteredPDFs = pdfs.filter(pdf => pdf.title.toLowerCase().includes(searchQuery));
-
-    if (searchQuery === '') {
-        document.getElementById('searchResults').style.display = 'none';
-    } else {
-        displaySearchResults(filteredPDFs);
-    }
+    displaySearchResults(filteredPDFs);
 }
 
 function showPDF(pdf) {
     document.getElementById('searchResults').style.display = 'none';
-    document.getElementById('pdfPreview').style.display = 'flex'; // Menggunakan flex agar tampil di tengah
+    document.getElementById('pdfPreview').style.display = 'block';
     document.getElementById('pdfViewer').src = pdf.file;
 }
 
@@ -47,5 +42,4 @@ function closePdfViewer() {
     document.getElementById('pdfViewer').src = '';
 }
 
-// Sembunyikan hasil pencarian saat halaman pertama kali dimuat
 document.getElementById('searchResults').style.display = 'none';
