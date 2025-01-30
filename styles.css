@@ -29,18 +29,6 @@ h1 {
     animation: fadeIn 1s ease-in-out;
 }
 
-/* Logo Styles */
-.logo {
-    width: 200px;  /* Saiz logo yang lebih besar */
-    height: auto;
-    display: block;
-    margin: 0 auto 30px;  /* Tengahkan logo dan beri jarak bawah */
-    border: none;  /* Pastikan tiada border */
-    background: none;  /* Pastikan tiada latar belakang */
-    border-radius: 0;  /* Elakkan sudut bulat jika tidak diperlukan */
-    box-shadow: none;  /* Elakkan bayang di sekeliling logo */
-}
-
 /* Container Styles */
 .container {
     width: 100%;
@@ -51,6 +39,14 @@ h1 {
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     animation: slideIn 1s ease-in-out;
+}
+
+/* Logo Styles */
+.logo {
+    width: 200px;  /* Saiz logo yang lebih besar */
+    height: auto;
+    display: block;
+    margin: 0 auto 30px;  /* Tengah dan beri jarak bawah */
 }
 
 /* Input Box Animation */
@@ -83,7 +79,11 @@ input[type="text"]:focus {
     transition: max-height 0.3s ease-out;
 }
 
-/* Search Result Item */
+/* Ensure search results are hidden by default */
+#searchResults {
+    display: none;
+}
+
 .search-result-item {
     background-color: #fff;
     padding: 15px;
@@ -104,7 +104,7 @@ input[type="text"]:focus {
     margin-top: 30px;
     display: none;
     animation: fadeIn 1s ease-in-out;
-    position: relative;  /* Ensure it's positioned relative to its parent */
+    position: relative;
     width: 100%;
     height: 600px;
 }
@@ -112,9 +112,9 @@ input[type="text"]:focus {
 /* Close Button at the Bottom */
 .close-btn {
     position: absolute;
-    bottom: 10px;  /* Move the button to the bottom */
-    left: 50%;  /* Center the button horizontally */
-    transform: translateX(-50%);  /* Adjust for exact centering */
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
     background: red;
     color: white;
     border: none;
@@ -123,31 +123,46 @@ input[type="text"]:focus {
     cursor: pointer;
     border-radius: 5px;
     transition: background 0.3s ease;
-    z-index: 10;  /* Ensures the button is above the iframe */
+    z-index: 10;
 }
 
 .close-btn:hover {
     background: darkred;
 }
 
-/* Loading Spinner */
+/* PDF Viewer */
+iframe {
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    width: 100%;
+    height: calc(100% - 50px);
+    border: none;
+}
+
+/* Hover Effects for PDF Viewer */
+iframe:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Loading Spinner Styles */
 .loading-spinner {
-    display: none;  /* Secara default sembunyikan spinner */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.7);  /* Latar belakang separa transparen */
-    z-index: 9999;  /* Pastikan spinner berada di atas segala elemen lain */
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
     justify-content: center;
     align-items: center;
-    display: flex;
+    visibility: hidden;
 }
 
 .spinner {
-    border: 8px solid #f3f3f3;
-    border-top: 8px solid #4A90E2;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #4A90E2;
     border-radius: 50%;
     width: 50px;
     height: 50px;

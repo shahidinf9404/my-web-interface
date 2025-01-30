@@ -11,7 +11,6 @@ function displaySearchResults(filteredPDFs) {
 
     if (filteredPDFs.length === 0) {
         searchResultsDiv.style.display = 'none';
-        hideSpinner(); // Hide spinner when no results
         return;
     }
 
@@ -26,60 +25,41 @@ function displaySearchResults(filteredPDFs) {
     });
 }
 
-// Function to search documents
 function searchDocuments() {
     const searchQuery = document.getElementById('searchBox').value.toLowerCase().trim();
     const searchResultsDiv = document.getElementById('searchResults');
 
-    // Show the spinner during the search process
-    showSpinner();
-
     if (searchQuery === "") {
-        searchResultsDiv.innerHTML = ''; // Clear search results
-        searchResultsDiv.style.display = 'none'; // Hide search results
-        hideSpinner();  // Hide spinner when there's no search query
+        searchResultsDiv.innerHTML = ''; // Kosongkan hasil pencarian
+        searchResultsDiv.style.display = 'none'; // Sembunyikan daftar
         return;
     }
 
-    // Filter the PDFs based on search query
     const filteredPDFs = pdfs.filter(pdf => pdf.title.toLowerCase().includes(searchQuery));
     displaySearchResults(filteredPDFs);
 }
 
-// Function to show the PDF
 function showPDF(pdf) {
     document.getElementById('searchResults').style.display = 'none';
     document.getElementById('pdfPreview').style.display = 'block';
     document.getElementById('pdfViewer').src = pdf.file;
-
-    // Show spinner while the PDF is loading
-    showSpinner();
-
-    // Wait until PDF is loaded, then hide the spinner
-    const iframe = document.getElementById('pdfViewer');
-    iframe.onload = function() {
-        hideSpinner();
-    };
 }
 
-// Function to close the PDF viewer
 function closePdfViewer() {
     document.getElementById('pdfPreview').style.display = 'none';
     document.getElementById('pdfViewer').src = '';
-    hideSpinner(); // Ensure spinner is hidden when the viewer is closed
-}
-
-// Function to show the spinner
-function showSpinner() {
-    document.getElementById('loadingSpinner').style.display = 'flex';
-}
-
-// Function to hide the spinner
-function hideSpinner() {
-    document.getElementById('loadingSpinner').style.display = 'none';
 }
 
 // Hide search results by default when page loads
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('searchResults').style.display = 'none';
 });
+
+// Show loading spinner when performing a search or fetching data
+function showLoadingSpinner() {
+    document.getElementById('loadingSpinner').style.visibility = 'visible';
+}
+
+function hideLoadingSpinner() {
+    document.getElementById('loadingSpinner').style.visibility = 'hidden';
+}
