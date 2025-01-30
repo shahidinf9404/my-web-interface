@@ -28,15 +28,23 @@ function displaySearchResults(filteredPDFs) {
 function searchDocuments() {
     const searchQuery = document.getElementById('searchBox').value.toLowerCase().trim();
     const searchResultsDiv = document.getElementById('searchResults');
+    const loadingSpinner = document.getElementById('loadingSpinner');
 
     if (searchQuery === "") {
-        searchResultsDiv.innerHTML = ''; // Kosongkan hasil pencarian
-        searchResultsDiv.style.display = 'none'; // Sembunyikan daftar
+        searchResultsDiv.innerHTML = ''; // Clear search results
+        searchResultsDiv.style.display = 'none'; // Hide search results container
+        loadingSpinner.style.display = 'none'; // Hide loading spinner
         return;
     }
 
+    loadingSpinner.style.display = 'flex'; // Show loading spinner
+
     const filteredPDFs = pdfs.filter(pdf => pdf.title.toLowerCase().includes(searchQuery));
-    displaySearchResults(filteredPDFs);
+
+    setTimeout(() => {  // Simulating delay for demonstration
+        loadingSpinner.style.display = 'none'; // Hide loading spinner
+        displaySearchResults(filteredPDFs);
+    }, 1000); // Simulating a 1-second delay
 }
 
 function showPDF(pdf) {
