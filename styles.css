@@ -202,7 +202,6 @@ iframe:hover {
 .logo {
     width: 200px;  /* Saiz yang lebih besar untuk logo */
     height: auto;
-    display: block;
     margin: 0 auto 30px;  /* Tengahkan logo dan beri jarak bawah */
     border-radius: 10px;  /* Sudut logo yang lebih lembut */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);  /* Bayang lembut di sekeliling logo */
