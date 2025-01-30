@@ -30,8 +30,8 @@ function searchDocuments() {
     const searchResultsDiv = document.getElementById('searchResults');
 
     if (searchQuery === "") {
-        searchResultsDiv.innerHTML = ''; // Kosongkan hasil pencarian
-        searchResultsDiv.style.display = 'none'; // Sembunyikan daftar
+        searchResultsDiv.innerHTML = ''; // Clear search results
+        searchResultsDiv.style.display = 'none'; // Hide results list
         return;
     }
 
@@ -50,16 +50,10 @@ function closePdfViewer() {
     document.getElementById('pdfViewer').src = '';
 }
 
-// Hide search results by default when page loads
+// Hide loading spinner and display the container after DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById('searchResults').style.display = 'none';
+    setTimeout(() => {
+        document.getElementById('loadingSpinner').style.display = 'none';
+        document.querySelector('.container').style.display = 'block';
+    }, 1500); // Adjust the delay for the spinner as needed
 });
-
-// Show loading spinner when performing a search or fetching data
-function showLoadingSpinner() {
-    document.getElementById('loadingSpinner').style.visibility = 'visible';
-}
-
-function hideLoadingSpinner() {
-    document.getElementById('loadingSpinner').style.visibility = 'hidden';
-}

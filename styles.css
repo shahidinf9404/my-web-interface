@@ -18,6 +18,46 @@ body {
     padding: 20px;
 }
 
+/* Loading Spinner Styles */
+.loading-spinner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensure it's on top of all content */
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-top: 4px solid #4A90E2;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+/* Spinner Animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Logo Styles */
+.logo {
+    width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
 /* Header Styles */
 h1 {
     font-size: 3rem;
@@ -29,7 +69,7 @@ h1 {
     animation: fadeIn 1s ease-in-out;
 }
 
-/* Container Styles */
+/* Container Styles with Animation */
 .container {
     width: 100%;
     max-width: 800px;
@@ -38,15 +78,21 @@ h1 {
     background-color: #fff;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    animation: slideIn 1s ease-in-out;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: slideIn 1s forwards ease-in-out;
 }
 
-/* Logo Styles */
-.logo {
-    width: 200px;  /* Saiz logo yang lebih besar */
-    height: auto;
-    display: block;
-    margin: 0 auto 30px;  /* Tengah dan beri jarak bawah */
+/* SlideIn Animation */
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Input Box Animation */
@@ -79,11 +125,7 @@ input[type="text"]:focus {
     transition: max-height 0.3s ease-out;
 }
 
-/* Ensure search results are hidden by default */
-#searchResults {
-    display: none;
-}
-
+/* Search Result Item */
 .search-result-item {
     background-color: #fff;
     padding: 15px;
@@ -109,7 +151,7 @@ input[type="text"]:focus {
     height: 600px;
 }
 
-/* Close Button at the Bottom */
+/* Close Button */
 .close-btn {
     position: absolute;
     bottom: 10px;
@@ -140,40 +182,6 @@ iframe {
     border: none;
 }
 
-/* Hover Effects for PDF Viewer */
-iframe:hover {
-    transform: scale(1.02);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
-}
-
-/* Loading Spinner Styles */
-.loading-spinner {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    visibility: hidden;
-}
-
-.spinner {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #4A90E2;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
 /* Responsive Design */
 @media screen and (max-width: 768px) {
     .container {
@@ -195,9 +203,5 @@ iframe:hover {
     .close-btn {
         font-size: 14px;
         padding: 6px 10px;
-    }
-
-    .logo {
-        width: 150px;  /* Saiz logo yang lebih kecil pada skrin lebih kecil */
     }
 }
