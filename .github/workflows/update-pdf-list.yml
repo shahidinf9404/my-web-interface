@@ -1,60 +1,43 @@
-name: Update PDF List
+name: Auto Update PDFs
 
 on:
   push:
-    paths:
-      - 'pdfs/**'
+    branches:
+      - main
 
 jobs:
   update-pdf-list:
     runs-on: ubuntu-latest
-
     steps:
-      # Checkout the code
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Get the list of PDF files in the 'pdfs' folder
-      - name: Get PDF list
+      - name: Generate list of PDFs
         run: |
           echo "Generating list of PDFs..."
-          PDF_FILES=$(find pdfs -type f -name "*.pdf")
+          PDFs=$(find ./pdfs -type f -name "*.pdf")
           echo "Found the following PDFs:"
-          echo "$PDF_FILES"
+          echo "$PDFs"
           
-          # Create a file with the PDF file paths for later use
-          echo "$PDF_FILES" > pdf_list.txt
-
-      # Update the script.js with the new PDF list
-      - name: Update script.js
-        run: |
-          echo "Updating script.js with new PDF list..."
+          # Generate the list in script.js (you can modify this as per your actual needs)
+          echo "Updating script.js with new PDFs"
           echo "const pdfs = [" > script.js
-          
-          # URL encode spaces and special characters
-          url_encode() {
-            local string="$1"
-            echo -n "$string" | jq -sRr @uri
-          }
-
-          # Loop through each PDF file and add it to the script.js file
-          while IFS= read -r pdf; do
-            title=$(basename "$pdf" .pdf)
-            encoded_pdf=$(url_encode "$pdf")
-            # Append the data in the required format
-            echo "    { title: \"$title\", file: \"$encoded_pdf\" }," >> script.js
-          done < pdf_list.txt
+          for file in $PDFs; do
+            # Format the file path and title
+            title=$(basename "$file" | sed 's/%20/ /g')  # Replace %20 with space
+            file_path="\"$file\""
+            echo "    { title: \"$title\", file: $file_path }," >> script.js
+          done
           echo "];" >> script.js
 
-      # Commit and push the changes to script.js
-      - name: Commit and push changes
+      - name: Commit updated script.js
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
-          
-          # Use the token to authenticate and set the remote URL
-          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
-          
           git add script.js
           git commit -m "Auto-update script.js with new PDFs"
+
+      - name: Push changes
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
           git push
