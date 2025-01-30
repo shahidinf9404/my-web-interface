@@ -26,7 +26,15 @@ function displaySearchResults(filteredPDFs) {
 }
 
 function searchDocuments() {
-    const searchQuery = document.getElementById('searchBox').value.toLowerCase();
+    const searchQuery = document.getElementById('searchBox').value.toLowerCase().trim();
+    const searchResultsDiv = document.getElementById('searchResults');
+
+    if (searchQuery === "") {
+        searchResultsDiv.innerHTML = ''; // Kosongkan hasil pencarian
+        searchResultsDiv.style.display = 'none'; // Sembunyikan daftar
+        return;
+    }
+
     const filteredPDFs = pdfs.filter(pdf => pdf.title.toLowerCase().includes(searchQuery));
     displaySearchResults(filteredPDFs);
 }
@@ -42,4 +50,7 @@ function closePdfViewer() {
     document.getElementById('pdfViewer').src = '';
 }
 
-document.getElementById('searchResults').style.display = 'none';
+// Hide search results by default when page loads
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById('searchResults').style.display = 'none';
+});

@@ -41,7 +41,7 @@ h1 {
     animation: slideIn 1s ease-in-out;
 }
 
-/* Input Box */
+/* Input Box Animation */
 input[type="text"] {
     width: 100%;
     max-width: 500px;
@@ -71,6 +71,11 @@ input[type="text"]:focus {
     transition: max-height 0.3s ease-out;
 }
 
+/* Ensure search results are hidden by default */
+#searchResults {
+    display: none;
+}
+
 .search-result-item {
     background-color: #fff;
     padding: 15px;
@@ -86,7 +91,7 @@ input[type="text"]:focus {
     transform: translateX(10px) scale(1.05);
 }
 
-/* PDF Preview */
+/* PDF Preview Container */
 .pdf-preview {
     margin-top: 30px;
     display: none;
@@ -127,27 +132,6 @@ iframe {
 iframe:hover {
     transform: scale(1.02);
     box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
-}
-
-/* Animations */
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(-50%);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
 }
 
 /* Responsive Design */
