@@ -42,37 +42,12 @@ function searchDocuments() {
 function showPDF(pdf) {
     document.getElementById('searchResults').style.display = 'none';
     document.getElementById('pdfPreview').style.display = 'block';
-
-    const url = pdf.file;
-    const canvas = document.getElementById('pdfCanvas');
-    const context = canvas.getContext('2d');
-    const spinner = document.getElementById('loadingSpinner');
-    
-    spinner.style.display = 'block'; // Show the spinner
-
-    // Use PDF.js to display the PDF
-    pdfjsLib.getDocument(url).promise.then(pdfDoc => {
-        pdfDoc.getPage(1).then(page => {
-            const scale = 1.5;
-            const viewport = page.getViewport({ scale: scale });
-
-            canvas.width = viewport.width;
-            canvas.height = viewport.height;
-
-            page.render({
-                canvasContext: context,
-                viewport: viewport
-            }).promise.then(() => {
-                // Hide spinner after PDF is rendered
-                spinner.style.display = 'none';
-            });
-        });
-    });
+    document.getElementById('pdfViewer').src = pdf.file;
 }
 
 function closePdfViewer() {
     document.getElementById('pdfPreview').style.display = 'none';
-    document.getElementById('pdfCanvas').style.display = 'none';
+    document.getElementById('pdfViewer').src = '';
 }
 
 // Hide search results by default when page loads
