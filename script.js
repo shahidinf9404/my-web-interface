@@ -1,7 +1,7 @@
 const pdfs = [
     { title: "BORANG TEMPAHAN KENDERAAN BDHA 2024(Hanizam)", file: "pdfs/BORANG%20TEMPAHAN%20KENDERAAN%20BDHA%202024%28Hanizam%29.pdf" },
     { title: "Panduan Pengguna Perkhidmatan PCN Wifi", file: "pdfs/Panduan%20Pengguna%20Perkhidmatan%20PCN%20Wifi.pdf" },
-    { title: "visa", file: "pdfs/visa.pdf" }
+    { title: "COUNTRIES_THAT_REQUIRE_VISA_and_DO_NOT_REQUIRE_VISA", file: "pdfs/COUNTRIES%20THAT%20REQUIRE%20VISA%20and%20DO%20NOT%20REQUIRE%20VISA.pdf" }
 ];
 
 // Function to display the search results
@@ -30,8 +30,8 @@ function searchDocuments() {
     const searchResultsDiv = document.getElementById('searchResults');
 
     if (searchQuery === "") {
-        searchResultsDiv.innerHTML = '';
-        searchResultsDiv.style.display = 'none';
+        searchResultsDiv.innerHTML = ''; // Kosongkan hasil pencarian
+        searchResultsDiv.style.display = 'none'; // Sembunyikan daftar
         return;
     }
 
