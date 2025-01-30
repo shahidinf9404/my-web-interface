@@ -38,7 +38,20 @@ h1 {
     background-color: #fff;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    animation: slideIn 1s ease-in-out;
+    animation: slideIn 1s ease-in-out forwards; /* Menambah 'forwards' untuk memastikan animasi selesai tanpa reset */
+    opacity: 1; /* Pastikan opacity kekal penuh selepas animasi */
+}
+
+/* Slide-In Animation */
+@keyframes slideIn {
+    0% {
+        transform: translateY(-30px); /* Mula dari atas */
+        opacity: 0; /* Mulakan dengan opacity 0 */
+    }
+    100% {
+        transform: translateY(0); /* Kedudukan akhir */
+        opacity: 1; /* Pastikan opacity penuh selepas animasi */
+    }
 }
 
 /* Input Box Animation */
