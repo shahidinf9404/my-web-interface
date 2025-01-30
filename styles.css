@@ -197,3 +197,11 @@ iframe:hover {
         padding: 6px 10px;
     }
 }
+
+/* Logo Styles */
+.logo {
+    width: 100px;  /* Sesuaikan saiz mengikut keperluan */
+    height: auto;
+    display: block;
+    margin: 0 auto 20px;  /* Tengah dan beri jarak bawah */
+}
