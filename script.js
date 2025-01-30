@@ -27,6 +27,13 @@ function displaySearchResults(filteredPDFs) {
 
 function searchDocuments() {
     const searchQuery = document.getElementById('searchBox').value.toLowerCase();
+    const searchResultsDiv = document.getElementById('searchResults');
+    
+    if (searchQuery.trim() === "") {
+        searchResultsDiv.style.display = 'none';
+        return;
+    }
+
     const filteredPDFs = pdfs.filter(pdf => pdf.title.toLowerCase().includes(searchQuery));
     displaySearchResults(filteredPDFs);
 }
@@ -42,4 +49,5 @@ function closePdfViewer() {
     document.getElementById('pdfViewer').src = '';
 }
 
+// Hide search results by default
 document.getElementById('searchResults').style.display = 'none';
