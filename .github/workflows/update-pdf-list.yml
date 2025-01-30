@@ -18,7 +18,7 @@ jobs:
       - name: Get PDF list
         run: |
           echo "Generating list of PDFs..."
-          PDF_FILES=$(ls pdfs/*.pdf)
+          PDF_FILES=$(find pdfs -type f -name "*.pdf")
           echo "Found the following PDFs: $PDF_FILES"
           echo "PDF_FILES=$PDF_FILES" >> $GITHUB_ENV
 
@@ -27,9 +27,13 @@ jobs:
         run: |
           echo "Updating script.js with new PDF list..."
           echo "const pdfs = [" > script.js
+          # Loop through each PDF file and add it to the script.js file
           for pdf in $PDF_FILES; do
+            # Escape spaces and special characters
             title=$(basename "$pdf" .pdf)
-            echo "    { title: \"$title\", file: \"$pdf\" }," >> script.js
+            # Ensure the file path is properly escaped for JS
+            escaped_pdf="${pdf//\//\\/}"
+            echo "    { title: \"$title\", file: \"$escaped_pdf\" }," >> script.js
           done
           echo "];" >> script.js
 
