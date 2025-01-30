@@ -18,13 +18,6 @@ body {
     padding: 20px;
 }
 
-/* Logo Styles */
-.logo {
-    width: 150px;
-    height: auto;
-    margin-bottom: 20px;
-}
-
 /* Header Styles */
 h1 {
     font-size: 3rem;
@@ -36,7 +29,16 @@ h1 {
     animation: fadeIn 1s ease-in-out;
 }
 
-/* Container Styles with Animation */
+/* Logo Image */
+#logo {
+    max-width: 150px;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Container Styles */
 .container {
     width: 100%;
     max-width: 800px;
@@ -45,21 +47,7 @@ h1 {
     background-color: #fff;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    transform: translateY(50px);
-    animation: slideIn 1s forwards ease-in-out;
-}
-
-/* SlideIn Animation */
-@keyframes slideIn {
-    0% {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    animation: slideIn 1s ease-in-out;
 }
 
 /* Input Box Animation */
@@ -92,7 +80,11 @@ input[type="text"]:focus {
     transition: max-height 0.3s ease-out;
 }
 
-/* Search Result Item */
+/* Ensure search results are hidden by default */
+#searchResults {
+    display: none;
+}
+
 .search-result-item {
     background-color: #fff;
     padding: 15px;
@@ -118,7 +110,7 @@ input[type="text"]:focus {
     height: 600px;
 }
 
-/* Close Button */
+/* Close Button at the Bottom */
 .close-btn {
     position: absolute;
     bottom: 10px;
@@ -147,6 +139,12 @@ iframe {
     width: 100%;
     height: calc(100% - 50px);
     border: none;
+}
+
+/* Hover Effects for PDF Viewer */
+iframe:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive Design */

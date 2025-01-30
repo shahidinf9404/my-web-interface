@@ -1,7 +1,7 @@
 const pdfs = [
     { title: "BORANG TEMPAHAN KENDERAAN BDHA 2024(Hanizam)", file: "pdfs/BORANG%20TEMPAHAN%20KENDERAAN%20BDHA%202024%28Hanizam%29.pdf" },
     { title: "Panduan Pengguna Perkhidmatan PCN Wifi", file: "pdfs/Panduan%20Pengguna%20Perkhidmatan%20PCN%20Wifi.pdf" },
-    { title: "COUNTRIES_THAT_REQUIRE_VISA_and_DO_NOT_REQUIRE_VISA", file: "pdfs/COUNTRIES%20THAT%20REQUIRE%20VISA%20and%20DO%20NOT%20REQUIRE%20VISA.pdf" }
+    { title: "visa", file: "pdfs/visa.pdf" }
 ];
 
 // Function to display the search results
@@ -30,8 +30,8 @@ function searchDocuments() {
     const searchResultsDiv = document.getElementById('searchResults');
 
     if (searchQuery === "") {
-        searchResultsDiv.innerHTML = ''; // Clear search results
-        searchResultsDiv.style.display = 'none'; // Hide results list
+        searchResultsDiv.innerHTML = '';
+        searchResultsDiv.style.display = 'none';
         return;
     }
 
@@ -50,7 +50,7 @@ function closePdfViewer() {
     document.getElementById('pdfViewer').src = '';
 }
 
-// Show the container after page is fully loaded
+// Hide search results by default when page loads
 document.addEventListener("DOMContentLoaded", () => {
-    document.querySelector('.container').style.display = 'block';
+    document.getElementById('searchResults').style.display = 'none';
 });
