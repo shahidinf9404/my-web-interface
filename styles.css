@@ -18,6 +18,13 @@ body {
     padding: 20px;
 }
 
+/* Logo Styles */
+.logo {
+    width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
 /* Header Styles */
 h1 {
     font-size: 3rem;
@@ -29,7 +36,7 @@ h1 {
     animation: fadeIn 1s ease-in-out;
 }
 
-/* Container Styles */
+/* Container Styles with Animation */
 .container {
     width: 100%;
     max-width: 800px;
@@ -38,19 +45,20 @@ h1 {
     background-color: #fff;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    animation: slideIn 1s ease-in-out forwards; /* Menambah 'forwards' untuk memastikan animasi selesai tanpa reset */
-    opacity: 1; /* Pastikan opacity kekal penuh selepas animasi */
+    opacity: 0;
+    transform: translateY(50px);
+    animation: slideIn 1s forwards ease-in-out;
 }
 
-/* Slide-In Animation */
+/* SlideIn Animation */
 @keyframes slideIn {
     0% {
-        transform: translateY(-30px); /* Mula dari atas */
-        opacity: 0; /* Mulakan dengan opacity 0 */
+        opacity: 0;
+        transform: translateY(50px);
     }
     100% {
-        transform: translateY(0); /* Kedudukan akhir */
-        opacity: 1; /* Pastikan opacity penuh selepas animasi */
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -84,11 +92,7 @@ input[type="text"]:focus {
     transition: max-height 0.3s ease-out;
 }
 
-/* Ensure search results are hidden by default */
-#searchResults {
-    display: none;
-}
-
+/* Search Result Item */
 .search-result-item {
     background-color: #fff;
     padding: 15px;
@@ -114,7 +118,7 @@ input[type="text"]:focus {
     height: 600px;
 }
 
-/* Close Button at the Bottom */
+/* Close Button */
 .close-btn {
     position: absolute;
     bottom: 10px;
@@ -143,35 +147,6 @@ iframe {
     width: 100%;
     height: calc(100% - 50px);
     border: none;
-}
-
-iframe:hover {
-    transform: scale(1.02);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
-}
-
-/* Loading Spinner Styles */
-.loading-spinner {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: none;
-    z-index: 1000;
-}
-
-.spinner {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #4A90E2;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
 }
 
 /* Responsive Design */
