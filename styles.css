@@ -29,6 +29,18 @@ h1 {
     animation: fadeIn 1s ease-in-out;
 }
 
+/* Logo Styles */
+.logo {
+    width: 200px;  /* Saiz logo yang lebih besar */
+    height: auto;
+    display: block;
+    margin: 0 auto 30px;  /* Tengahkan logo dan beri jarak bawah */
+    border: none;  /* Pastikan tiada border */
+    background: none;  /* Pastikan tiada latar belakang */
+    border-radius: 0;  /* Elakkan sudut bulat jika tidak diperlukan */
+    box-shadow: none;  /* Elakkan bayang di sekeliling logo */
+}
+
 /* Container Styles */
 .container {
     width: 100%;
@@ -38,20 +50,7 @@ h1 {
     background-color: #fff;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    animation: slideIn 1s ease-in-out forwards; /* Menambah 'forwards' untuk memastikan animasi selesai tanpa reset */
-    opacity: 1; /* Pastikan opacity kekal penuh selepas animasi */
-}
-
-/* Slide-In Animation */
-@keyframes slideIn {
-    0% {
-        transform: translateY(-30px); /* Mula dari atas */
-        opacity: 0; /* Mulakan dengan opacity 0 */
-    }
-    100% {
-        transform: translateY(0); /* Kedudukan akhir */
-        opacity: 1; /* Pastikan opacity penuh selepas animasi */
-    }
+    animation: slideIn 1s ease-in-out;
 }
 
 /* Input Box Animation */
@@ -84,11 +83,7 @@ input[type="text"]:focus {
     transition: max-height 0.3s ease-out;
 }
 
-/* Ensure search results are hidden by default */
-#searchResults {
-    display: none;
-}
-
+/* Search Result Item */
 .search-result-item {
     background-color: #fff;
     padding: 15px;
@@ -109,7 +104,7 @@ input[type="text"]:focus {
     margin-top: 30px;
     display: none;
     animation: fadeIn 1s ease-in-out;
-    position: relative;
+    position: relative;  /* Ensure it's positioned relative to its parent */
     width: 100%;
     height: 600px;
 }
@@ -117,9 +112,9 @@ input[type="text"]:focus {
 /* Close Button at the Bottom */
 .close-btn {
     position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 10px;  /* Move the button to the bottom */
+    left: 50%;  /* Center the button horizontally */
+    transform: translateX(-50%);  /* Adjust for exact centering */
     background: red;
     color: white;
     border: none;
@@ -128,45 +123,35 @@ input[type="text"]:focus {
     cursor: pointer;
     border-radius: 5px;
     transition: background 0.3s ease;
-    z-index: 10;
+    z-index: 10;  /* Ensures the button is above the iframe */
 }
 
 .close-btn:hover {
     background: darkred;
 }
 
-/* PDF Viewer */
-iframe {
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    width: 100%;
-    height: calc(100% - 50px);
-    border: none;
-}
-
-iframe:hover {
-    transform: scale(1.02);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
-}
-
-/* Loading Spinner Styles */
+/* Loading Spinner */
 .loading-spinner {
+    display: none;  /* Secara default sembunyikan spinner */
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: none;
-    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);  /* Latar belakang separa transparen */
+    z-index: 9999;  /* Pastikan spinner berada di atas segala elemen lain */
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
 .spinner {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #4A90E2;
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #4A90E2;
     border-radius: 50%;
     width: 50px;
     height: 50px;
-    animation: spin 2s linear infinite;
+    animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
@@ -196,19 +181,7 @@ iframe:hover {
         font-size: 14px;
         padding: 6px 10px;
     }
-}
 
-/* Logo Styles */
-.logo {
-    width: 200px;  /* Saiz yang lebih besar untuk logo */
-    height: auto;
-    margin: 0 auto 30px;  /* Tengahkan logo dan beri jarak bawah */
-    border-radius: 10px;  /* Sudut logo yang lebih lembut */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);  /* Bayang lembut di sekeliling logo */
-}
-
-/* Membuat logo responsif */
-@media screen and (max-width: 768px) {
     .logo {
         width: 150px;  /* Saiz logo yang lebih kecil pada skrin lebih kecil */
     }

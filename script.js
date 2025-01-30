@@ -25,29 +25,47 @@ function displaySearchResults(filteredPDFs) {
     });
 }
 
+// Function to search documents
 function searchDocuments() {
     const searchQuery = document.getElementById('searchBox').value.toLowerCase().trim();
     const searchResultsDiv = document.getElementById('searchResults');
 
+    // Show the spinner during the search process
+    showSpinner();
+
     if (searchQuery === "") {
-        searchResultsDiv.innerHTML = ''; // Kosongkan hasil pencarian
-        searchResultsDiv.style.display = 'none'; // Sembunyikan daftar
+        searchResultsDiv.innerHTML = ''; // Clear search results
+        searchResultsDiv.style.display = 'none'; // Hide search results
+        hideSpinner();  // Hide spinner when there's no search query
         return;
     }
 
     const filteredPDFs = pdfs.filter(pdf => pdf.title.toLowerCase().includes(searchQuery));
     displaySearchResults(filteredPDFs);
+    hideSpinner();  // Hide spinner after search is complete
 }
 
+// Function to show the PDF
 function showPDF(pdf) {
     document.getElementById('searchResults').style.display = 'none';
     document.getElementById('pdfPreview').style.display = 'block';
     document.getElementById('pdfViewer').src = pdf.file;
 }
 
+// Function to close the PDF viewer
 function closePdfViewer() {
     document.getElementById('pdfPreview').style.display = 'none';
     document.getElementById('pdfViewer').src = '';
+}
+
+// Function to show the spinner
+function showSpinner() {
+    document.getElementById('loadingSpinner').style.display = 'flex';
+}
+
+// Function to hide the spinner
+function hideSpinner() {
+    document.getElementById('loadingSpinner').style.display = 'none';
 }
 
 // Hide search results by default when page loads
