@@ -50,10 +50,7 @@ function closePdfViewer() {
     document.getElementById('pdfViewer').src = '';
 }
 
-// Hide loading spinner and display the container after DOM is loaded
+// Show the container after page is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
-    setTimeout(() => {
-        document.getElementById('loadingSpinner').style.display = 'none';
-        document.querySelector('.container').style.display = 'block';
-    }, 1500); // Adjust the delay for the spinner as needed
+    document.querySelector('.container').style.display = 'block';
 });
