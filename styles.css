@@ -38,6 +38,7 @@ h1 {
     background-color: #fff;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    animation: slideIn 1s ease-in-out;
 }
 
 /* Input Box Animation */
@@ -52,19 +53,27 @@ input[type="text"] {
     outline: none;
     background-color: #f9f9f9;
     color: #333;
+    transition: all 0.3s ease;
 }
 
 input[type="text"]:focus {
     border-color: #4A90E2;
     box-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
+    transform: scale(1.05);
 }
 
 /* Search Results */
 .search-results {
     margin-top: 20px;
-    display: block;
+    display: none;
     overflow-y: auto;
     max-height: 300px;
+    transition: max-height 0.3s ease-out;
+}
+
+/* Ensure search results are hidden by default */
+#searchResults {
+    display: none;
 }
 
 .search-result-item {
@@ -74,32 +83,39 @@ input[type="text"]:focus {
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .search-result-item:hover {
     background-color: #e0e8ff;
+    transform: translateX(10px) scale(1.05);
 }
 
 /* PDF Preview Container */
 .pdf-preview {
     margin-top: 30px;
     display: none;
-    position: relative; 
+    animation: fadeIn 1s ease-in-out;
+    position: relative;  /* Ensure it's positioned relative to its parent */
+    width: 100%;
+    height: 600px;
 }
 
 /* Close Button at the Bottom */
 .close-btn {
     position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 10px;  /* Move the button to the bottom */
+    left: 50%;  /* Center the button horizontally */
+    transform: translateX(-50%);  /* Adjust for exact centering */
     background: red;
     color: white;
     border: none;
-    padding: 10px 20px;
-    font-size: 18px;
+    padding: 8px 12px;
+    font-size: 16px;
     cursor: pointer;
-    border-radius: 30px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    z-index: 10;  /* Ensures the button is above the iframe */
 }
 
 .close-btn:hover {
@@ -110,9 +126,16 @@ input[type="text"]:focus {
 iframe {
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
     width: 100%;
-    height: calc(100% - 50px);
+    height: calc(100% - 50px);  /* Adjust height to make space for the button */
     border: none;
+}
+
+/* Hover Effects for PDF Viewer */
+iframe:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive Design */
@@ -127,5 +150,14 @@ iframe {
 
     input[type="text"] {
         max-width: 100%;
+    }
+
+    .search-result-item {
+        padding: 12px;
+    }
+
+    .close-btn {
+        font-size: 14px;
+        padding: 6px 10px;
     }
 }
