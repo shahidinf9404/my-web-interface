@@ -3,39 +3,42 @@ name: Update PDF List
 on:
   push:
     paths:
-      - 'pdfs/**'  # Trigger when PDF files in the 'pdfs' folder are changed
+      - 'pdfs/**'
 
 jobs:
   update-pdf-list:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      # Checkout the code
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Update script.js with new PDFs
-      run: |
-        # Find all PDF files in the pdfs directory
-        PDF_FILES=$(find pdfs -name "*.pdf" -type f)
+      # Get the list of PDF files in the 'pdfs' folder
+      - name: Get PDF list
+        run: |
+          echo "Generating list of PDFs..."
+          PDF_FILES=$(ls pdfs/*.pdf)
+          echo "Found the following PDFs: $PDF_FILES"
+          echo "PDF_FILES=$PDF_FILES" >> $GITHUB_ENV
 
-        # Start building the PDF list array in script.js
-        echo "const pdfs = [" > script.js
+      # Update the script.js with the new PDF list
+      - name: Update script.js
+        run: |
+          echo "Updating script.js with new PDF list..."
+          echo "const pdfs = [" > script.js
+          for pdf in $PDF_FILES; do
+            title=$(basename "$pdf" .pdf)
+            echo "    { title: \"$title\", file: \"$pdf\" }," >> script.js
+          done
+          echo "];" >> script.js
 
-        # Loop through the PDF files and add them to script.js
-        for file in $PDF_FILES; do
-          # Extract the PDF filename without the path
-          FILENAME=$(basename "$file")
-          TITLE=$(echo "$FILENAME" | sed 's/%20/ /g')  # Decode %20 to space
-          echo "    { title: \"$TITLE\", file: \"$file\" }," >> script.js
-        done
-
-        # End the PDF list array
-        echo "];" >> script.js
-
-    - name: Commit changes
-      run: |
-        git config --global user.name "GitHub Actions"
-        git config --global user.email "actions@github.com"
-        git add script.js
-        git commit -m "Auto-update script.js with new PDFs"
-        git push origin main
+      # Commit and push the changes to script.js
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
+          git add script.js
+          git commit -m "Auto-update script.js with new PDFs"
+          git push
