@@ -200,8 +200,17 @@ iframe:hover {
 
 /* Logo Styles */
 .logo {
-    width: 100px;  /* Sesuaikan saiz mengikut keperluan */
+    width: 200px;  /* Saiz yang lebih besar untuk logo */
     height: auto;
     display: block;
-    margin: 0 auto 20px;  /* Tengah dan beri jarak bawah */
+    margin: 0 auto 30px;  /* Tengahkan logo dan beri jarak bawah */
+    border-radius: 10px;  /* Sudut logo yang lebih lembut */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);  /* Bayang lembut di sekeliling logo */
+}
+
+/* Membuat logo responsif */
+@media screen and (max-width: 768px) {
+    .logo {
+        width: 150px;  /* Saiz logo yang lebih kecil pada skrin lebih kecil */
+    }
 }
