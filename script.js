@@ -46,8 +46,11 @@ function showPDF(pdf) {
     const url = pdf.file;
     const canvas = document.getElementById('pdfCanvas');
     const context = canvas.getContext('2d');
+    const spinner = document.getElementById('loadingSpinner');
+    
+    spinner.style.display = 'block'; // Show the spinner
 
-    // Gunakan PDF.js untuk memaparkan PDF
+    // Use PDF.js to display the PDF
     pdfjsLib.getDocument(url).promise.then(pdfDoc => {
         pdfDoc.getPage(1).then(page => {
             const scale = 1.5;
@@ -59,6 +62,9 @@ function showPDF(pdf) {
             page.render({
                 canvasContext: context,
                 viewport: viewport
+            }).promise.then(() => {
+                // Hide spinner after PDF is rendered
+                spinner.style.display = 'none';
             });
         });
     });

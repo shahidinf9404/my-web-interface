@@ -38,20 +38,7 @@ h1 {
     background-color: #fff;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    animation: slideIn 1s ease-in-out forwards; /* Menambah 'forwards' untuk memastikan animasi selesai tanpa reset */
-    opacity: 1; /* Pastikan opacity kekal penuh selepas animasi */
-}
-
-/* Slide-In Animation */
-@keyframes slideIn {
-    0% {
-        transform: translateY(-30px); /* Mula dari atas */
-        opacity: 0; /* Mulakan dengan opacity 0 */
-    }
-    100% {
-        transform: translateY(0); /* Kedudukan akhir */
-        opacity: 1; /* Pastikan opacity penuh selepas animasi */
-    }
+    animation: slideIn 1s ease-in-out;
 }
 
 /* Input Box Animation */
@@ -84,11 +71,6 @@ input[type="text"]:focus {
     transition: max-height 0.3s ease-out;
 }
 
-/* Ensure search results are hidden by default */
-#searchResults {
-    display: none;
-}
-
 .search-result-item {
     background-color: #fff;
     padding: 15px;
@@ -111,7 +93,6 @@ input[type="text"]:focus {
     animation: fadeIn 1s ease-in-out;
     position: relative;
     width: 100%;
-    height: 600px;
 }
 
 /* Close Button at the Bottom */
@@ -135,43 +116,31 @@ input[type="text"]:focus {
     background: darkred;
 }
 
-/* PDF Viewer */
-iframe {
+/* PDF Canvas Styling */
+#pdfCanvas {
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
     width: 100%;
-    height: calc(100% - 50px);
-    border: none;
+    height: auto;
 }
 
-iframe:hover {
-    transform: scale(1.02);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
-}
-
-/* Loading Spinner Styles */
-.loading-spinner {
-    position: fixed;
+/* Loading Spinner */
+.spinner {
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    display: none;
-    z-index: 1000;
-}
-
-.spinner {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #4A90E2;
+    border: 4px solid #f3f3f3; /* Light grey */
+    border-top: 4px solid #3498db; /* Blue */
     border-radius: 50%;
     width: 50px;
     height: 50px;
-    animation: spin 2s linear infinite;
+    animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 /* Responsive Design */

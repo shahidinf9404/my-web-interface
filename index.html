@@ -19,14 +19,12 @@
         <!-- PDF Viewer Container with Close Button -->
         <div id="pdfPreview" class="pdf-preview">
             <button id="closeBtn" class="close-btn" onclick="closePdfViewer()">❌ Close</button>
-            <iframe id="pdfViewer" src="" width="100%" height="600px"></iframe>
+            <canvas id="pdfCanvas"></canvas>  <!-- PDF rendering canvas -->
+            <div id="loadingSpinner" class="spinner"></div> <!-- Loading spinner -->
         </div>
     </div>
 
-    <div id="loadingSpinner" class="loading-spinner">
-        <div class="spinner"></div>
-    </div>
-
     <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script> <!-- Include PDF.js -->
 </body>
 </html>
