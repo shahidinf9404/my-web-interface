@@ -42,12 +42,31 @@ function searchDocuments() {
 function showPDF(pdf) {
     document.getElementById('searchResults').style.display = 'none';
     document.getElementById('pdfPreview').style.display = 'block';
-    document.getElementById('pdfViewer').src = pdf.file;
+
+    const url = pdf.file;
+    const canvas = document.getElementById('pdfCanvas');
+    const context = canvas.getContext('2d');
+
+    // Gunakan PDF.js untuk memaparkan PDF
+    pdfjsLib.getDocument(url).promise.then(pdfDoc => {
+        pdfDoc.getPage(1).then(page => {
+            const scale = 1.5;
+            const viewport = page.getViewport({ scale: scale });
+
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+
+            page.render({
+                canvasContext: context,
+                viewport: viewport
+            });
+        });
+    });
 }
 
 function closePdfViewer() {
     document.getElementById('pdfPreview').style.display = 'none';
-    document.getElementById('pdfViewer').src = '';
+    document.getElementById('pdfCanvas').style.display = 'none';
 }
 
 // Hide search results by default when page loads
