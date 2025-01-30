@@ -1,7 +1,7 @@
 const pdfs = [
     { title: "BORANG TEMPAHAN KENDERAAN BDHA 2024(Hanizam)", file: "pdfs/BORANG%20TEMPAHAN%20KENDERAAN%20BDHA%202024%28Hanizam%29.pdf" },
     { title: "Panduan Pengguna Perkhidmatan PCN Wifi", file: "pdfs/Panduan%20Pengguna%20Perkhidmatan%20PCN%20Wifi.pdf" },
-    { title: "vis", file: "pdfs/vis.pdf" }
+    { title: "visa", file: "pdfs/visa.pdf" }
 ];
 
 // Function to display the search results
