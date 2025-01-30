@@ -41,7 +41,7 @@ h1 {
     animation: slideIn 1s ease-in-out;
 }
 
-/* Input Box Animation */
+/* Input Box */
 input[type="text"] {
     width: 100%;
     max-width: 500px;
@@ -71,11 +71,6 @@ input[type="text"]:focus {
     transition: max-height 0.3s ease-out;
 }
 
-/* Ensure search results are hidden by default */
-#searchResults {
-    display: none;
-}
-
 .search-result-item {
     background-color: #fff;
     padding: 15px;
@@ -91,69 +86,61 @@ input[type="text"]:focus {
     transform: translateX(10px) scale(1.05);
 }
 
-/* PDF Preview Container */
+/* PDF Preview */
 .pdf-preview {
-    margin-top: 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Latar belakang gelap */
     display: none;
-    animation: fadeIn 1s ease-in-out;
-    position: relative;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
 
 /* Close Button */
 .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: red;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 0, 0, 0.8);
     color: white;
     border: none;
-    padding: 8px 12px;
-    font-size: 16px;
+    padding: 10px 15px;
+    font-size: 18px;
+    font-weight: bold;
     cursor: pointer;
     border-radius: 5px;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, transform 0.2s ease;
+    z-index: 9999;
 }
 
 .close-btn:hover {
-    background: darkred;
+    background: rgba(200, 0, 0, 0.9);
+    transform: scale(1.1);
 }
 
 /* PDF Viewer */
-iframe {
+#pdfViewer {
+    width: 90%;
+    height: 80vh;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    width: 100%;
-    height: 600px;
-    border: none;
+    background: white;
+    z-index: 1001;
 }
 
-/* Hover Effects for PDF Viewer */
-iframe:hover {
-    transform: scale(1.02);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
-}
-
-/* Responsive Design */
+/* Responsif */
 @media screen and (max-width: 768px) {
-    .container {
-        padding: 20px;
-    }
-
-    h1 {
-        font-size: 2rem;
-    }
-
-    input[type="text"] {
-        max-width: 100%;
-    }
-
-    .search-result-item {
-        padding: 12px;
-    }
-
     .close-btn {
-        font-size: 14px;
-        padding: 6px 10px;
+        top: 10px;
+        right: 10px;
+        font-size: 16px;
+    }
+
+    #pdfViewer {
+        width: 95%;
+        height: 75vh;
     }
 }
