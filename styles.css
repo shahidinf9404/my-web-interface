@@ -20,9 +20,9 @@ body {
 
 /* Header Styles */
 h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     color: #4A90E2;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     font-weight: 700;
     text-align: center;
     letter-spacing: 1px;
@@ -34,19 +34,19 @@ h1 {
     width: 100%;
     max-width: 800px;
     text-align: center;
-    padding: 30px;
+    padding: 40px;
     background-color: #fff;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     animation: slideIn 1s ease-in-out;
 }
 
-/* Input Box */
+/* Input Box Animation */
 input[type="text"] {
     width: 100%;
     max-width: 500px;
     padding: 12px 20px;
-    margin: 15px 0;
+    margin: 20px 0;
     border: 2px solid #ddd;
     border-radius: 30px;
     font-size: 1.1rem;
@@ -59,28 +59,27 @@ input[type="text"] {
 input[type="text"]:focus {
     border-color: #4A90E2;
     box-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
-    transform: scale(1.02);
+    transform: scale(1.05);
 }
 
 /* Search Results */
 .search-results {
-    margin-top: 15px;
+    margin-top: 20px;
     display: none;
     overflow-y: auto;
-    max-height: 0;
-    transition: max-height 0.5s ease-out, opacity 0.3s ease;
-}
-
-.search-results.show {
     max-height: 300px;
-    opacity: 1;
+    transition: max-height 0.3s ease-out;
 }
 
-/* Search Result Items */
+/* Ensure search results are hidden by default */
+#searchResults {
+    display: none;
+}
+
 .search-result-item {
     background-color: #fff;
     padding: 15px;
-    margin: 8px 0;
+    margin: 10px 0;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
@@ -89,14 +88,14 @@ input[type="text"]:focus {
 
 .search-result-item:hover {
     background-color: #e0e8ff;
-    transform: translateX(5px) scale(1.03);
+    transform: translateX(10px) scale(1.05);
 }
 
 /* PDF Preview Container */
 .pdf-preview {
-    margin-top: 20px;
+    margin-top: 30px;
     display: none;
-    animation: fadeIn 0.8s ease-in-out;
+    animation: fadeIn 1s ease-in-out;
     position: relative;
 }
 
@@ -108,16 +107,15 @@ input[type="text"]:focus {
     background: red;
     color: white;
     border: none;
-    padding: 6px 12px;
-    font-size: 14px;
+    padding: 8px 12px;
+    font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
-    transition: background 0.3s ease, transform 0.2s ease;
+    transition: background 0.3s ease;
 }
 
 .close-btn:hover {
     background: darkred;
-    transform: scale(1.1);
 }
 
 /* PDF Viewer */
@@ -132,29 +130,8 @@ iframe {
 
 /* Hover Effects for PDF Viewer */
 iframe:hover {
-    transform: scale(1.01);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-/* Animations */
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+    transform: scale(1.02);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive Design */
@@ -169,5 +146,14 @@ iframe:hover {
 
     input[type="text"] {
         max-width: 100%;
+    }
+
+    .search-result-item {
+        padding: 12px;
+    }
+
+    .close-btn {
+        font-size: 14px;
+        padding: 6px 10px;
     }
 }
